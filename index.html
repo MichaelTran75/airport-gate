@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gate A1 · Sân bay 3D — World Kit build</title>
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" rel="stylesheet">
+  <!-- Import map: giống 3D garden / CLL — 1 instance three duy nhất (webgpu build, tự fallback WebGL2) -->
+  <script type="importmap">
+  { "imports": {
+      "three": "https://esm.sh/three@0.171.0/webgpu",
+      "three/webgpu": "https://esm.sh/three@0.171.0/webgpu",
+      "three/tsl": "https://esm.sh/three@0.171.0/tsl" } }
+  </script>
+  <link rel="stylesheet" href="css/app.css?v=20261016220748">
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="scene"></div>
+    <div class="ui-container">
+      <div class="ui title"><b>Gate A1 · Sân bay 3D</b></div>
+      <div class="ui panel tr">
+        <div class="ph">Ground handling · quay vòng 108,5 phút</div>
+        <div class="sub">• <b>Ống lồng</b> (jet bridge) nối nhà ga với cửa L1, máy lạnh PCA treo gầm cấp gió cho cabin.<br>
+          • <b>GSE:</b> xe kéo + dolly chở container LD3, xe nâng hàng (cargo loader), xe bồn &amp; xe tra nạp nhiên liệu, GPU cấp điện.<br>
+          • Đoàn hành lý chạy vòng giữa máy bay và sảnh hành lý nhà ga.<br>
+          • <b>Quay vòng (Boeing):</b> 467 khách, 2 cửa · lấy khách xuống 7,8 phút → nạp bếp giữa &amp; tầng trên 87 phút → lên khách 11,7 phút là đường găng; nhiên liệu 223 540 lít qua họng ngầm 4 vòi.<br>
+          • <b>Động cơ:</b> GEnx-2B của 747-8 theo cỡ thật: quạt 18 cánh Ø 2,66 m, dài 4,31 m, booster 3 · nén cao áp 10 · turbine cao áp 2 · thấp áp 6 cấp. Dựng lại từ lưới CFM56-7B (động cơ 737NG).</div>
+        <div class="credit">Lưới ruột động cơ: <a href="https://sketchfab.com/3d-models/engine-cfm56-7b-2cf2255cba12432cb144abe5b87390e6" target="_blank" rel="noopener">“Engine CFM56-7B”</a> — Michael Zhang, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Đã chỉnh sửa: thay quạt và nacelle, thêm cấp nén và turbine, đổi tỷ lệ.</div>
+      </div>
+      <div class="ui btnbar">
+        <button id="btnRotate"><i class="ti ti-player-play"></i>Tự xoay</button>
+        <button id="btnLabels"><i class="ti ti-tag"></i>Nhãn</button>
+        <button id="btnReset"><i class="ti ti-refresh"></i>Reset</button>
+        <button id="btnSound" aria-pressed="true" title="Âm thanh động cơ" aria-label="Âm thanh động cơ"><i class="ti ti-volume"></i></button>
+        <button id="btnIgnite" aria-pressed="false"
+          style="background: linear-gradient(135deg, #ff4500, #ff8c00); color: #fff; border: 1px solid rgba(255,255,255,0.4); font-weight: 700;"><i
+            class="ti ti-flame"></i> Engine</button>
+        <button id="btnDepart" title="Khởi hành: rút ống lồng → xe rời → đẩy lùi → lăn ra → cất cánh → bay"><i class="ti ti-plane-departure"></i>Khởi hành</button>
+        <button id="btnLand" hidden title="Hạ độ cao → tiếp cận → hạ cánh → về cổng"><i class="ti ti-plane-arrival"></i>Hạ cánh</button>
+      </div>
+      <div id="depCap" class="ui depcap" hidden></div>
+    </div>
+    <div id="loading">Đang dựng sân bay…</div>
+    <div id="err"></div>
+  </div>
+
+  <!-- mã cảnh · bộ giải gió (Web Worker) · lưới ruột động cơ CFM56-7B (assets/cfm56.bin, CC BY 4.0) -->
+  <script src="js/app.js?v=20261016220748"></script>
+</body>
+
+</html>

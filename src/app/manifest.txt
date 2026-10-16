@@ -1,0 +1,28 @@
+# Thứ tự ghép mã cảnh (build.py nối các mảnh này thành js/app.js — toàn bộ là MỘT hàm build() chung phạm vi,
+# nên mỗi mảnh dùng được hằng/hàm khai báo ở mảnh trước; đổi thứ tự = đổi thứ tự chạy).
+00-boot.js                   # dòng 1–16 · tải three.js + lưới CFM56, mở hàm build()
+01-engine.js                 # dòng 17–38 · renderer · cảnh · camera · ánh sáng (World Kit)
+02-helpers.js                # dòng 39–293 · vật liệu, viền nét, Bag gộp lượt vẽ, bánh xe, bộ dựng càng, chữ sơn, container LD3, dolly
+03-environment.js            # dòng 294–357 · slab sân đỗ, khe nối, vị trí đỗ, hệ tỉ lệ 747-8 (gx/gy), vạch sơn
+04-aircraft-dims.js          # dòng 358–425 · bảng hình học dùng chung: cánh, động cơ, càng, cửa
+05-fuselage-nose.js          # dòng 426–940 · makePlane: thân lathe, biến dạng da, mũi + khối kính lái
+06-apu-wing-builders.js      # dòng 941–1164 · chóp đuôi APU, hàm dựng cánh extrude + mực panel
+07-wings-tail.js             # dòng 1165–1388 · cánh cơ khí (Krueger/flap/spoiler/kết cấu), đuôi ngang, canoe, đuôi đứng
+08-fuselage-ink.js           # dòng 1389–1607 · cửa sổ, cửa, hầm hàng (mực ôm da), bụng cánh
+09-gear-engines.js           # dòng 1608–2162 · càng chính + 4 động cơ GEnx-2B (lưới CFM56) + luồng gió hầm
+10-nose-gear.js              # dòng 2163–2234 · càng mũi
+11-interior.js               # dòng 2235–2426 · nội thất 747-8I (364 ghế), da thật skinHW
+12-lights-close.js           # dòng 2427–2468 · đèn chớp + đèn hàng hải, đóng makePlane, lw/onGround
+13-jet-bridge.js             # dòng 2469–2653 · ống lồng, PCA
+14-terminal.js               # dòng 2654–2912 · nhà ga + kết cấu
+15-gse.js                    # dòng 2913–3669 · xe mặt đất: tug, xe nâng hàng, xe tra, xe bồn, GPU, cụm container, ống/cáp
+16-apron.js                  # dòng 3670–3750 · cọc tiêu, chèn bánh, cột đèn, VDGS, người
+17-labels.js                 # dòng 3751–3778 · nhãn
+18-engine-run.js             # dòng 3779–3844 · trục quay khởi động, âm thanh, nút Engine
+19-camera-ui.js              # dòng 3845–3942 · camera orbit/zoom/pan, nút, resize
+19b-departure.js             # MỚI 14/10 · chuỗi khởi hành ở cổng: rút ống lồng → xe rời → xe kéo → đèn chớp → đẩy lùi → nổ máy
+flight/20-gear-rig.js        # MỚI 14/10 · động học thu/thả càng (giằng gập 4 khâu, bogie nghiêng/quay, cửa càng mũi)
+flight/21-runway.js          # MỚI 14/10 · cảnh đường băng 09 (dựng lười): sơn, đèn, PAPI, ILS, đường lăn A + RET · fPath/fSample
+flight/22-sky.js             # MỚI 14/10 · cảnh bầu trời: biển mây fBm, mây tích, vệt ngưng tụ
+flight/23-flight.js          # MỚI 14/10 · điều phối: lăn ra → cất cánh (mô hình lực) → bay bằng → hạ cánh → về cổng
+20-loop.js                   # dòng 3943–4142 · đoàn hành lý, vòng lặp khung hình

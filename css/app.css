@@ -1,0 +1,229 @@
+/* Gate A1 · Sân bay 3D — giao diện */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #E2D6C0;
+}
+
+#wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #E2D6C0;
+  color: #2e2a22;
+  user-select: none;
+}
+
+#scene {
+  position: absolute;
+  inset: 0;
+}
+
+#scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.ui-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 24px;
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.ui {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.title {
+  top: 20px;
+  left: 24px;
+  font-size: 14px;
+  color: #4a3728;
+}
+
+.title b {
+  color: #2e2a22;
+  font-weight: 700;
+}
+
+.panel {
+  background: rgba(226, 214, 192, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(74, 55, 40, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 22px rgba(80, 70, 45, .12);
+}
+
+.panel.tr {
+  right: 24px;
+  bottom: 20px;
+  max-width: 280px;
+}
+
+.ph {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  color: #8a7355;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.sub {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #4a3728;
+}
+
+.sub b {
+  color: #2e2a22;
+}
+
+.credit {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(74, 55, 40, 0.15);
+  font-size: 10px;
+  line-height: 1.45;
+  color: #8a7355;
+}
+
+.credit a {
+  color: inherit;
+}
+
+.btnbar {
+  left: 24px;
+  bottom: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 11px;
+  border: 1px solid rgba(74, 55, 40, 0.4);
+  background: rgba(226, 214, 192, 0.7);
+  color: #4a3728;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+button:hover {
+  background: #efece2;
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+  color: #6a6450;
+  font-size: 13px;
+  letter-spacing: .4px;
+}
+
+#err {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: #8a0303;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .ui-container {
+    padding: 0 12px;
+  }
+
+  .title {
+    top: 12px;
+    left: 16px;
+  }
+
+  .panel.tr {
+    top: 44px;
+    bottom: auto;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+  }
+
+  .btnbar {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .btnbar button {
+    min-width: 0;
+    justify-content: center;
+  }
+
+  #coordHud {
+    bottom: 82px !important;
+  }
+}
+
+/* khung hẹp: toạ độ HUD lên trên thanh nút để không đè nút Engine (thêm nút âm thanh 11/10) */
+@media (max-width: 1240px) { #coordHud { bottom: 64px !important; } }
+
+/* chuỗi khởi hành: chú thích bước đang chạy (giữa trên) · nút bị khoá khi đang chạy chuỗi */
+.depcap {
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(720px, 86vw);
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 55, 40, 0.3);
+  background: rgba(251, 249, 241, 0.92);
+  color: #3a2e24;
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
+}
+.depcap[hidden] { display: none; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+@media (max-width: 520px) { .depcap { top: auto; bottom: 150px; border-radius: 12px; font-size: 12px; } }
+/* chuyến bay (14/10): dòng số liệu dưới chú thích · nhãn tua nhanh · màn mờ chuyển cảnh · nút Hạ cánh */
+.depcap small { display: block; margin-top: 2px; font: 600 11.5px/1.3 "SF Mono", ui-monospace, monospace; color: #5a4738; letter-spacing: .3px; }
+.depcap .rate { font-style: normal; font-size: 11px; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: rgba(74, 55, 40, .1); white-space: nowrap; }
+#veil { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .7s ease; z-index: 2; }
+#veil.on { opacity: 1; }
+#wrap { transition: background .6s ease; }
+button[hidden] { display: none; }
+#btnLand { background: linear-gradient(135deg, #3f6f9e, #6c9cc4); color: #fff; border-color: rgba(255, 255, 255, .4); font-weight: 700; }
+/* mặt đất thật trên trời (15/10): ghi nguồn ảnh vệ tinh USGS */
+#earthCredit { position: absolute; left: 12px; bottom: 10px; z-index: 3; font: 500 11px/1.3 system-ui, sans-serif; color: #3f4b57; background: rgba(240, 244, 248, .78); padding: 3px 8px; border-radius: 6px; pointer-events: auto; }
+#earthCredit a { color: inherit; }
+#earthCredit[hidden] { display: none; }
